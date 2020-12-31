@@ -1,12 +1,12 @@
 $:.push File.expand_path("lib", __dir__)
 
 # Maintain your gem's version:
-require "quick_search/mathes_searcher/version"
+require "quick_search/mathes/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |spec|
-  spec.name        = "quick_search-mathes_searcher"
-  spec.version     = QuickSearch::MathesSearcher::VERSION
+  spec.name        = "quick_search-mathes"
+  spec.version     = QuickSearch::Mathes::VERSION
   spec.authors     = ["Gregory Wiedeman"]
   spec.email       = ["gregory.wiedeman1@gmail.com"]
   spec.homepage    = "https://archives.albany.edu"

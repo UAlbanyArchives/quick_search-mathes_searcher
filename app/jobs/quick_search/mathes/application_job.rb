@@ -1,5 +1,5 @@
 module QuickSearch
-  module MathesSearcher
+  module Mathes
     class ApplicationJob < ActiveJob::Base
     end
   end

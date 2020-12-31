@@ -1,2 +1,2 @@
-QuickSearch::MathesSearcher::Engine.routes.draw do
+QuickSearch::Mathes::Engine.routes.draw do
 end

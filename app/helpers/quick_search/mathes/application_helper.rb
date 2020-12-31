@@ -1,5 +1,5 @@
 module QuickSearch
-  module MathesSearcher
+  module Mathes
     module ApplicationHelper
     end
   end
