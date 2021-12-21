@@ -54,7 +54,7 @@ module QuickSearch
     end
 
     def base_url
-      "https://archives.albany.edu/mathes/catalog"
+      "https://archives.albany.edu/books/catalog"
     end
 
     def parameters
@@ -74,7 +74,7 @@ module QuickSearch
     end
 
     def collection_builder(uri)
-      collection_link = URI::join(base_url, +"/mathes/catalog/" + uri.tr(".", "-"))
+      collection_link = URI::join(base_url, +"/books/catalog/" + uri.tr(".", "-"))
 
       collection_link
     end
@@ -84,7 +84,7 @@ module QuickSearch
     end
 
     def loaded_link
-      "https://archives.albany.edu/mathes?search_field=all_fields&q=" + http_request_queries['not_escaped']
+      "https://archives.albany.edu/books?search_field=all_fields&q=" + http_request_queries['not_escaped']
     end
 
   end
