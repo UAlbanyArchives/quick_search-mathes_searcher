@@ -5,7 +5,7 @@ module QuickSearch
       @http.ssl_config.verify_mode=(OpenSSL::SSL::VERIFY_NONE)
       resp = @http.get(base_url, parameters.to_query)
       @response = JSON.parse(resp.body)
-    end
+   end
 
     def results
       if results_list
@@ -15,11 +15,13 @@ module QuickSearch
         @results_list = []
 
         #@match_fields = ['title_ssm', '']
-
         @response['data'].each do |value|
           result = OpenStruct.new
           #result.title = value['title']['attributes']['value']
           result.title = value['attributes']['title_tesim']['attributes']['value']
+          if value['attributes'].key?('display_date_tesim')
+            result.date = value['attributes']['display_date_tesim']['attributes']['value'].gsub(/[^0-9]/, '')
+          end
           if value['attributes'].key?('author_ssim')
             result.author = value['attributes']['author_ssim']['attributes']['value']
           end
@@ -33,7 +35,6 @@ module QuickSearch
             result.contributor = value['attributes']['contributor_ssim']['attributes']['value']
           end
           result.link = value['links']['self']
-          result.date = value['attributes']['display_date_tesim']['attributes']['value']
           #if value.key?('description')
             #result.author = value['description'][0]
           #end
@@ -59,6 +60,7 @@ module QuickSearch
 
     def parameters
       {
+        'f' => { 'collecting_area_ssim' => ['Mathes Childrens Literature'] },
         'search_field' => 'all_fields',
         'q' => http_request_queries['not_escaped'],
         'utf8' => true,
@@ -67,11 +69,11 @@ module QuickSearch
       }
     end
 
-    def link_builder(value)
-      link = URI::join(base_url, +"/concern/" + value['has_model_ssim'][0].downcase + "s/" + value['id']).to_s
-
-      link
-    end
+    #def link_builder(value)
+    #  link = URI::join(base_url, +"/concern/" + value['has_model_ssim'][0].downcase + "s/" + value['id']).to_s
+    #
+    #  link
+    #end
 
     def collection_builder(uri)
       collection_link = URI::join(base_url, +"/books/catalog/" + uri.tr(".", "-"))
@@ -84,7 +86,7 @@ module QuickSearch
     end
 
     def loaded_link
-      "https://archives.albany.edu/books?search_field=all_fields&q=" + http_request_queries['not_escaped']
+      "https://archives.albany.edu/books?f[collecting_area_ssim][]=Mathes+Childrens+Literature&search_field=all_fields&q=" + http_request_queries['not_escaped']
     end
 
   end
