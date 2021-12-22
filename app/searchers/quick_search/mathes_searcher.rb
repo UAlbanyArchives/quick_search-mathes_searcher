@@ -20,7 +20,7 @@ module QuickSearch
           #result.title = value['title']['attributes']['value']
           result.title = value['attributes']['title_tesim']['attributes']['value']
           if value['attributes'].key?('display_date_tesim')
-            result.date = value['attributes']['display_date_tesim']['attributes']['value'].gsub(/[^0-9]/, '')
+            result.date = value['attributes']['display_date_tesim']['attributes']['value'].gsub(/[^0-9a-z .-]/i, '')
           end
           if value['attributes'].key?('author_ssim')
             result.author = value['attributes']['author_ssim']['attributes']['value']
